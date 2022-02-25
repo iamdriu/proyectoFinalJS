@@ -120,14 +120,14 @@ function addProduct(e) {
     if (!alreadyInCart) {
         $("#cart").append(createCartItem(burger));
         cart.push(burger);
-        alert("Se ha agregado un " + burger.name + " a tu orden.");
+        swal("¡Excelente!", "Se ha agregado un " + burger.name + " a tu orden.", "success");
         addCartItemListener(burger); //le agrego los even listener al + / -
 
 
     } else { //si ya está, le SUMO
         cart.push(burger);
         $(`#${burger.id}number`).text((parseInt($(`#${burger.id}number`).text()) + 1).toString());
-        alert("Se ha agregado un " + burger.name + " a tu orden.");
+        swal("¡Excelente!", "Se ha agregado un " + burger.name + " a tu orden.", "success");
     }
     updateTotal();
     saveLocal("cart", JSON.stringify(cart));
@@ -239,7 +239,7 @@ function updateTotal() {
 //listener al boton para pagar
 $("#checkout").click(function () {
     if (cart.length == 0) {
-        alert("Aún no tienes productos en tu carrito");
+        swal("¡Oh, No!", "Aún no tienes productos en tu carrito", "warning");
     } else {
         $("#cart-container").animate({ right: '-30%' }, "slow");
         $("#form1").show();
@@ -292,7 +292,7 @@ $("#form1").submit(function (e) {
             $("#confirmation").fadeIn();
           });
     } else {
-        alert("Debes llenar todos los campos")
+        swal("¡Oh, No!", "Debes llenar todos los campos", "warning");
     }
 
 });
